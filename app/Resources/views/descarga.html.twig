@@ -1,0 +1,27 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <script>
+    function Descargar(id) {
+        var recurso = Routing.generate("descargar",
+                                            {"proceso_id":id}
+                                        ,true); 
+        window.location = recurso;
+    } 
+    </script>
+   
+   <div id="fin"
+         align="center">
+           <img src="{{asset('img/ZIP1-240x240.png')}}" ></img>
+           <h3><span>Fichero</span> <h2>{{Proceso.zip}}</h2> <h3><span>generado pulse para descargar</span></h3>
+                <input type="submit" 
+                       class="btn btn-bg btn-success"
+                           value="Descargar Fichero"
+                           onClick="Descargar('{{Proceso.id}}')">
+                </input>
+                <a href="{{path("queryProceso")}}" class="btn btn-bg btn-success"> Consulta de Procesos</a>
+           
+    </div>
+
+{% endblock %}
+

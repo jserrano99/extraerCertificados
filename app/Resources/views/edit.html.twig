@@ -1,0 +1,45 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+   <script>
+    function Extraer(id) {
+        $("#imagen").modal('show'); 
+        var recurso = Routing.generate("extraer",
+                                            {"proceso_id":id}
+                                        ,true);
+        window.location = recurso;
+    }    
+    
+    
+    </script>
+    
+         <div id="imagen" class="modal fade" role="dialog" margin="auto">
+            <div class="modal-dialog">
+                <div class="modal-content modal-lg">
+                    <div class="modal-body" text-align="center">
+                        <img src="{{asset('img/Circulo-Carga-62157.gif')}}"></img>
+                        <h2><span>Realizando extracción del fichero no cierre el navegador....</span></h2>
+                    </div>
+                </div>    
+            </div>
+        </div>
+                        
+    <div id="datos" class="container jumbotron text-center">
+        <h2><span>EXTRACCIÓN DE LOS CERTIFICADOS DE LA RENTA</span></h2>
+        <span> Organismo: {{Proceso.organismo.descripcion}}</span>
+        <br/>
+        <span> Descripción: {{Proceso.descripcion}}</span>
+        <br/>
+        <span> Fichero: {{Proceso.fichero}} </span>
+        <br/>
+        <span> Firma {{Proceso.firma}} </span>
+        <br/>
+        <span> Texto {{Proceso.texto}} </span>
+        <br/>
+        <input type="button" 
+                      class="btn btn-bg btn-success" 
+                      title="Confirmar" value="Confirmar" 
+                      onClick="Extraer('{{Proceso.id}}')">
+    </div>  
+{% endblock %}
+

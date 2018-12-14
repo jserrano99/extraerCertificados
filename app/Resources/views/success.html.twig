@@ -1,0 +1,90 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <script>
+        $(document).ready(function () {});
+
+        function Extraer(id) {
+            let recurso = Routing.generate("extraer",{"proceso_id": id}, true);
+            $('#siguiente').hide();
+            $("#imagen").modal('show');
+            $.ajax({
+                type: "POST",
+                url: recurso,
+                dataType: 'json',
+                success: function (data, status, xhr) {
+                    $('#imagen').hide();
+                    $('#siguiente').modal('show');
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    $('#imagen').hide();
+                    $('#error').modal('show');
+
+
+                }
+            });
+        }
+    </script>
+
+
+    <div id="imagen" class="modal fade" role="dialog" margin="auto">
+        <div class="modal-dialog">
+            <div class="modal-content modal-lg">
+                <div class="modal-body" text-align="center">
+                    <img src="{{ asset('img/Circulo-Carga-62157.gif') }}"></img>
+                    <h2><span>Realizando proceso del fichero no cierre el navegador....</span></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="siguiente" class="modal fade" role="dialog" margin="auto">
+        <div class="modal-dialog">
+            <div class="modal-content modal-lg">
+                <div class="modal-body" text-align="center">
+                    <h2><span>Extraccion realizada correctamente, pulse para continuar</span></h2>
+                    <input type="button"
+                           class="btn btn-bg btn-success"
+                           title="Continuar" value="Continuar"
+                           onClick="Extraer('{{ Proceso.id }}')">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="error" class="modal fade" role="dialog" margin="auto">
+        <div class="modal-dialog">
+            <div class="modal-content modal-lg">
+                <div class="modal-body" text-align="center">
+                    <h2><span>Extraccion TERMINA EN ERROR, pulse para continuar</span></h2>
+                    <a href="{{ path("queryProceso") }}" class="btn btn-bg btn-success"> VOLVER</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="datos" class="container jumbotron text-center">
+        <h2><span>EXTRACCIÓN DE LOS CERTIFICADOS DE LA RENTA</span></h2>
+        <br/>
+        <span> Organismo: {{ Proceso.organismo.descripcion }}</span>
+        <br/>
+        <span> Descripción: {{ Proceso.descripcion }}</span>
+        <br/>
+        <span> Fichero: {{ Proceso.fichero }} </span>
+        <br/>
+        <span> Firma {{ Proceso.firma }} </span>
+        <br/>
+        <span> Texto {{ Proceso.texto }} </span>
+        <br/>
+        <span> Fase {{ Proceso.fase.id }}-{{ Proceso.fase.descripcion }} </span>
+        <br/>
+
+        <input type="button"
+               class="btn btn-bg btn-success"
+               title="Confirmar" value="Confirmar"
+               onClick="Extraer('{{ Proceso.id }}', '{{ Proceso.fase.id }}')">
+        </br>
+        <a href="{{ path("queryProceso") }}" class="btn btn-bg btn-success"> Consulta de Procesos</a>
+    </div>
+{% endblock %}
+

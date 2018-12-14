@@ -1,0 +1,9 @@
+<script>
+    function Extraer(organismo,fichero,firma,texto) {
+        alert ('qui');
+        $("#imagen").modal('show'); 
+        var recurso = Routing.generate("extraer",{"organismo":organismo,"fichero":fichero,"firma":firma,"texto":texto},true);
+        alert(recurso);
+        window.location = recurso;
+    } 
+</script>

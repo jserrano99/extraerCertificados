@@ -1,0 +1,69 @@
+{% extends "layout.html.twig" %} 
+{% block titulo %} CONSULTA DE PROCESOS {% endblock %}
+{% block scripts %} 
+    <script src="{{asset('js/funciones.js') }}" type="text/javascript"></script>
+{% endblock%}
+{% block botonera %}   
+    <input type="button" 
+           title="Nuevo" 
+           class="btn btn-success" value=" Nuevo " 
+           onClick="nuevo()"> 
+    <input type="button" 
+           title="Consultar" 
+           class="btn btn-info" value=" Editar " 
+           onClick="editar()">
+    <input type="button" 
+           title="Eliminar" 
+           class="btn btn-warning" value=" Eliminar " 
+           onClick="eliminar()">
+ {% endblock %}
+{% block body %}
+    
+    <div class="container-fluid" >
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+        <br/>
+        <br/>
+        <table class="tabla table" border="1">
+            <thead> 
+                <tr class="success">
+                    <th class="text-center text-bold"></th>
+                    <th class="text-center text-bold">ID</th>
+                    <th class="text-center text-bold">Organismo</th>
+                    <th class="text-center text-bold">Fecha</th>
+                    <th class="text-center text-bold">Descripcion</th>
+                    <th class="text-center text-bold">Fichero Original</th>
+                    <th class="text-center text-bold">Fichero</th>
+                    <th class="text-center text-bold">Firma</th>
+                    <th class="text-center text-bold">Zip</th>
+                    <th class="text-center text-bold">Nº Trab</th>
+                    <th class="text-center text-bold">Fase</th>
+                </tr>
+            </thead>
+            <tbody>  
+            {% for Proceso in Procesos %}
+               <tr>
+                   	<td><input type="checkbox" 
+                               class="checkbox-inline"
+                               id="chk-{{Proceso.id}}" 
+                               name="{{Proceso.id}}"></td>
+                    <td class="text-center">{{Proceso.id}}</td>
+                    <td class="text-center">{{Proceso.organismo.descripcion}}</td>
+                    <td class="text-center">{{Proceso.fecha|date('d-m-Y')}}</td>
+                    <td>{{Proceso.descripcion}}</td>
+                    <td>{{Proceso.ficheroOriginal}}</td>
+                    <td class="text-center">{{Proceso.fichero}}</td>
+                    <td class="text-center">{{Proceso.firma}}</td>
+                    <td class="text-center">{{Proceso.zip}}</td>
+                    <td class="text-center">{{Proceso.contador}}</td>
+                    <td class="text-center">{{Proceso.fase.descripcion}}</td>
+                    
+               </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

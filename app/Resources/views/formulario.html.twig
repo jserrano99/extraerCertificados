@@ -1,0 +1,18 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    
+<div class="container jumbotron text-center">
+        <h2><span>EXTRACCIÓN DE LOS CERTIFICADOS DE LA RENTA 2018</span></h2>
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+        <div class="container">
+            {{form_start (form,{'action':'','method':'POST'})}}
+            {{form_end (form)}}
+        </div>
+</div>  
+{% endblock %}
+

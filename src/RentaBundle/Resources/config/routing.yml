@@ -1,0 +1,38 @@
+renta_homepage:
+    path:     /
+    defaults: { _controller: RentaBundle:Proceso:query }
+queryProceso:
+    path:     /proceso/query
+    defaults: { _controller: RentaBundle:Proceso:query }
+    options:
+        expose: true
+nuevoProceso:
+    path:     /proceso/add
+    defaults: { _controller: RentaBundle:Proceso:add }
+    options:
+        expose: true
+editarProceso:
+    path:     /proceso/edit/{proceso_id}
+    defaults: { _controller: RentaBundle:Proceso:edit }
+    options:
+        expose: true
+eliminarProceso:
+    path:     /proceso/delete/{proceso_id}
+    defaults: { _controller: RentaBundle:Proceso:delete }
+    options:
+        expose: true
+extraer:
+    path:     /extraer/{proceso_id}
+    defaults: { _controller: RentaBundle:Proceso:extraer }
+    options:
+        expose: true
+descargar:
+    path:     /descargar/{proceso_id}
+    defaults: { _controller: RentaBundle:Proceso:descargar }
+    options:
+        expose: true
+progreso:
+    path:     /proceso/progreso
+    defaults: { _controller: RentaBundle:Proceso:progreso }
+    options:
+        expose: true
